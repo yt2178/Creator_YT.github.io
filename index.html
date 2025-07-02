@@ -1,21 +1,36 @@
 <!DOCTYPE html>
-<html lang="he">
+<html lang="he" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <title>כפתור החלפת כיוון - גרור לסימניות</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>כפתור החלפת כיוון כתיבה - גרור וסמן</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 2rem;
-      direction: rtl;
-      background: #f9f9f9;
+      font-family: 'Heebo', Arial, sans-serif;
+      background: linear-gradient(135deg, #74ebd5, #ACB6E5);
       color: #333;
+      padding: 2rem;
+      margin: 0;
+      direction: rtl;
+      transition: background 0.5s, color 0.5s;
+      min-height: 100vh;
+    }
+    body.dark {
+      background: #222;
+      color: #eee;
     }
     h1 {
       margin-bottom: 1rem;
+      text-align: center;
     }
-    #bookmarklet {
+    p {
+      max-width: 400px;
+      margin: 1rem auto 0;
+      font-size: 1rem;
+      color: inherit;
+      text-align: center;
+    }
+    a#bookmarklet {
       display: inline-block;
       background-color: #007bff;
       color: white;
@@ -27,21 +42,240 @@
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
       user-select: none;
       transition: background-color 0.3s ease;
+      margin: 2rem auto 0;
+      display: block;
+      width: fit-content;
     }
-    #bookmarklet:hover {
+    a#bookmarklet:hover {
       background-color: #0056b3;
     }
-    p {
-      max-width: 400px;
-      margin: 1rem auto 0;
-      font-size: 1rem;
-      color: #555;
+
+    /* כפתור החלפת כיוון כתיבה */
+    #dir-toggle-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      padding: 8px 12px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-family: Arial, sans-serif;
+      cursor: grab;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: background-color 0.3s ease, transform 0.05s linear;
+      z-index: 9999;
+      user-select: none;
+      touch-action: none;
+      transform: translate(0, 0);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    #dir-toggle-btn:hover {
+      background-color: #0056b3;
+    }
+    body.dark #dir-toggle-btn {
+      background-color: #0a84ff;
+    }
+    body.dark #dir-toggle-btn:hover {
+      background-color: #0060df;
+    }
+
+    /* כפתור סגירה קטן */
+    #close-btn {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      padding: 0;
+      margin: 0;
+      line-height: 1;
+      user-select: none;
+      width: 18px;
+      height: 18px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      transition: background-color 0.3s ease;
+    }
+    #close-btn:hover {
+      background-color: rgba(255, 255, 255, 0.5);
     }
   </style>
 </head>
 <body>
+
   <h1>כפתור החלפת כיוון כתיבה</h1>
-  <a href="javascript:(()=>{const e=localStorage.getItem('direction');e&&(document.documentElement.style.transition='all 0.3s ease',document.documentElement.dir=e);const t=window.matchMedia('(prefers-color-scheme: dark)').matches,o=t?'#0a84ff':'#007bff',r=t?'#0060df':'#0056b3',n='white',d=document.createElement('button');d.id='dir-toggle-btn',d.textContent='rtl'===document.documentElement.dir?'החלף ל-LTR':'החלף ל-RTL',Object.assign(d.style,{position:'fixed',top:'20px',left:'20px',padding:'12px 20px',backgroundColor:o,color:n,border:'none',borderRadius:'8px',fontSize:'16px',fontFamily:'Arial, sans-serif',cursor:'grab',boxShadow:'0 4px 8px rgba(0,0,0,0.2)',transition:'background-color 0.2s ease, transform 0.05s linear',zIndex:9999,userSelect:'none',transform:'translate(0px, 0px)'}),d.onmouseenter=()=>d.style.backgroundColor=r,d.onmouseleave=()=>d.style.backgroundColor=o;let l=!1,c=!1,a=0,s=0,i=0,m=0;d.addEventListener('click',()=>{if(c)return;const e=document.documentElement,t='rtl'===e.dir?'ltr':'rtl';e.style.transition='all 0.3s ease',e.dir=t,d.textContent='rtl'===t?'החלף ל-LTR':'החלף ל-RTL',localStorage.setItem('direction',t)}),d.onmousedown=function(t){t.preventDefault(),l=!0,c=!1,d.style.cursor='grabbing';const o=d.getBoundingClientRect();a=t.clientX-o.left,s=t.clientY-o.top;function r(t){c=!0,i=t.clientX-a,m=t.clientY-s;const e=window.innerWidth-d.offsetWidth,r=window.innerHeight-d.offsetHeight;i=Math.min(Math.max(0,i),e),m=Math.min(Math.max(0,m),r),d.style.transform=`translate(${i}px, ${m}px)`}document.addEventListener('mousemove',r),document.onmouseup=function(){document.removeEventListener('mousemove',r),document.onmouseup=null,d.style.cursor='grab',c&&localStorage.setItem('btnPosTransform',JSON.stringify({x:i,y:m})),setTimeout(()=>{c=!1},0)}},d.ondragstart=()=>!1;const u=localStorage.getItem('btnPosTransform');if(u){const e=JSON.parse(u);i=e.x,m=e.y,d.style.transform=`translate(${i}px, ${m}px)`}document.body.appendChild(d),window.addEventListener('resize',()=>{const e=window.innerWidth-d.offsetWidth,t=window.innerHeight-d.offsetHeight;i=Math.min(i,e),m=Math.min(m,t),d.style.transform=`translate(${i}px, ${m}px)`})})();" id="bookmarklet" draggable="true">גרור את כפתור החלפת הכיוון לסרגל הסימניות</a>
-  <p>כשתגרור אותו לסרגל הסימניות שלך, תוכל ללחוץ עליו בכל דף אינטרנט כדי להפעיל את הכפתור.</p>
+  <p>גרור את הכפתור למקום שנוח לך. לחץ עליו כדי להחליף בין כיוון RTL ל-LTR. הבחירה תישמר גם לעתיד.</p>
+
+  <!-- ======================= כאן בוצע השינוי המרכזי ======================= -->
+  <!-- הקוד ב-href הוא עכשיו גרסה מכווצת של הסקריפט שבתחתית הדף -->
+  <a href="javascript:(()=>{if(document.getElementById('dir-toggle-btn')){const e=document.getElementById('dir-toggle-btn');e.style.display='flex';localStorage.removeItem('btnHidden');return}const e=document.createElement('button');e.id='dir-toggle-btn';const t=document.createElement('button');t.id='close-btn',t.textContent='×',t.title='הסתר כפתור',t.type='button';const o=document.createElement('span');o.id='btn-text',e.appendChild(t),e.appendChild(o);const n=()=>{const t=window.matchMedia('(prefers-color-scheme: dark)').matches||document.body.classList.contains('dark');e.style.backgroundColor=t?'#0a84ff':'#007bff',e.style.color='white'};const s=localStorage.getItem('direction');s?(document.documentElement.style.transition='all 0.3s ease',document.documentElement.dir=s,o.textContent='rtl'===s?'החלף ל-LTR':'החלף ל-RTL'):o.textContent='rtl'===document.documentElement.dir?'החלף ל-LTR':'החלף ל-RTL',n(),e.onmouseenter=()=>{e.style.backgroundColor=window.matchMedia('(prefers-color-scheme: dark)').matches?'#0060df':'#0056b3'},e.onmouseleave=()=>{n()};let l=!1,d,c;e.addEventListener('click',n=>{if(l)return;if(n.target===t)return;const s=document.documentElement,d='rtl'===s.dir?'ltr':'rtl';s.style.transition='all 0.3s ease',s.dir=d,o.textContent='rtl'===d?'החלף ל-LTR':'החלף ל-RTL',localStorage.setItem('direction',d)}),e.onmousedown=function(t){t.preventDefault(),l=!1,d=t.clientX,c=t.clientY,e.style.cursor='grabbing';const o=e.getBoundingClientRect(),n=t.clientX-o.left,s=t.clientY-o.top;function i(t){const o=t.clientX-d,c=t.clientY-dragStartY;if(!l){if(Math.abs(o)>5||Math.abs(c)>5)l=!0;else return}let i=t.clientX-n,r=t.clientY-s;const a=window.innerWidth-e.offsetWidth,g=window.innerHeight-e.offsetHeight;i=Math.min(Math.max(0,i),a),r=Math.min(Math.max(0,r),g),e.style.left=i+'px',e.style.top=r+'px',e.style.right='auto',e.style.bottom='auto'}document.addEventListener('mousemove',i),document.onmouseup=function(){document.removeEventListener('mousemove',i),document.onmouseup=null,e.style.cursor='grab',l&&localStorage.setItem('btnPos',JSON.stringify({left:e.style.left,top:e.style.top}))}},e.ondragstart=()=>!1,t.onclick=t=>{t.stopPropagation(),e.style.display='none',localStorage.setItem('btnHidden','true')};const i=localStorage.getItem('btnPos');i?(Object.assign(e.style,JSON.parse(i)),e.style.right='auto',e.style.bottom='auto'):(e.style.left='20px',e.style.top='20px');const r=localStorage.getItem('btnHidden');'true'===r&&(e.style.display='none'),document.body.appendChild(e)})();" id="bookmarklet" draggable="true">
+    גרור את כפתור החלפת הכיוון לסרגל הסימניות
+  </a>
+  <!-- ======================= סוף אזור השינוי ======================= -->
+
+
+  <script>
+    // הקוד כאן נשאר זהה לחלוטין. הוא משמש ליצירת הכפתור בדף הנוכחי
+    // וגם כמקור לקוד המכווץ של ה-Bookmarklet.
+    // **בונוס קטן שהוספתי:** אם תלחץ על ה-Bookmarklet בדף הזה כשהכפתור מוסתר, הוא יופיע שוב.
+    if (document.getElementById('dir-toggle-btn')) {
+        const btn = document.getElementById('dir-toggle-btn');
+        btn.style.display = 'flex'; // או 'block' בהתאם לעיצוב
+        localStorage.removeItem('btnHidden');
+        return; // מונע יצירת כפתור חדש
+    }
+
+    const btn = document.createElement('button');
+    btn.id = 'dir-toggle-btn';
+
+    // צור את כפתור הסגירה הקטן
+    const closeBtn = document.createElement('button');
+    closeBtn.id = 'close-btn';
+    closeBtn.textContent = '×'; // איקס קטן
+    closeBtn.title = 'הסתר כפתור';
+    closeBtn.type = 'button';
+
+    // צור אלמנט ספאן לטקסט בתוך הכפתור
+    const btnText = document.createElement('span');
+    btnText.id = 'btn-text';
+
+    // הוסף את כפתור הסגירה לפני הטקסט (כדי שיהיה בצד ימין ב-RTL)
+    btn.appendChild(closeBtn);
+    btn.appendChild(btnText);
+
+    // פונקציה לעדכון צבעים לפי מצב כהה
+    function updateBtnColors() {
+      const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches || document.body.classList.contains('dark');
+      btn.style.backgroundColor = isDark ? '#0a84ff' : '#007bff';
+      btn.style.color = 'white';
+    }
+
+    // טעינת כיוון מהזיכרון
+    const savedDir = localStorage.getItem('direction');
+    if (savedDir) {
+      document.documentElement.style.transition = 'all 0.3s ease';
+      document.documentElement.dir = savedDir;
+      btnText.textContent = savedDir === 'rtl' ? 'החלף ל-LTR' : 'החלף ל-RTL';
+    } else {
+      btnText.textContent = document.documentElement.dir === 'rtl' ? 'החלף ל-LTR' : 'החלף ל-RTL';
+    }
+
+    updateBtnColors();
+
+    // אפקט ריחוף (רק על הכפתור הראשי, לא על האיקס)
+    btn.onmouseenter = () => {
+      btn.style.backgroundColor = window.matchMedia('(prefers-color-scheme: dark)').matches ? '#0060df' : '#0056b3';
+    };
+    btn.onmouseleave = () => {
+      updateBtnColors();
+    };
+
+    // החלפת כיוון בלחיצה
+    let isDragging = false;
+    let dragStartX, dragStartY;
+
+    btn.addEventListener('click', (e) => {
+      if (isDragging) return;
+      if (e.target === closeBtn) return; 
+
+      const html = document.documentElement;
+      const newDir = html.dir === 'rtl' ? 'ltr' : 'rtl';
+      html.style.transition = 'all 0.3s ease';
+      html.dir = newDir;
+      btnText.textContent = newDir === 'rtl' ? 'החלף ל-LTR' : 'החלף ל-RTL';
+      localStorage.setItem('direction', newDir);
+    });
+
+    // גרירת הכפתור
+    btn.onmousedown = function(event) {
+      event.preventDefault();
+      isDragging = false;
+      dragStartX = event.clientX;
+      dragStartY = event.clientY;
+      btn.style.cursor = 'grabbing';
+
+      const rect = btn.getBoundingClientRect();
+      const shiftX = event.clientX - rect.left;
+      const shiftY = event.clientY - rect.top;
+
+      function onMouseMove(event) {
+        const moveX = event.clientX - dragStartX;
+        const moveY = event.clientY - dragStartY;
+
+        if (!isDragging) {
+          if (Math.abs(moveX) > 5 || Math.abs(moveY) > 5) {
+            isDragging = true;
+          } else {
+            return;
+          }
+        }
+
+        let newX = event.clientX - shiftX;
+        let newY = event.clientY - shiftY;
+
+        const maxX = window.innerWidth - btn.offsetWidth;
+        const maxY = window.innerHeight - btn.offsetHeight;
+
+        newX = Math.min(Math.max(0, newX), maxX);
+        newY = Math.min(Math.max(0, newY), maxY);
+
+        btn.style.left = newX + 'px';
+        btn.style.top = newY + 'px';
+        btn.style.right = 'auto';
+        btn.style.bottom = 'auto';
+      }
+
+      document.addEventListener('mousemove', onMouseMove);
+
+      document.onmouseup = function() {
+        document.removeEventListener('mousemove', onMouseMove);
+        document.onmouseup = null;
+        btn.style.cursor = 'grab';
+        if (isDragging) {
+          localStorage.setItem('btnPos', JSON.stringify({
+            left: btn.style.left,
+            top: btn.style.top
+          }));
+        }
+      };
+    };
+
+    btn.ondragstart = () => false;
+
+    // טיפול בלחיצה על כפתור הסגירה
+    closeBtn.onclick = (e) => {
+      e.stopPropagation(); 
+      btn.style.display = 'none';
+      localStorage.setItem('btnHidden', 'true');
+    };
+
+    // שחזור מיקום והסתרה
+    const savedPos = localStorage.getItem('btnPos');
+    if (savedPos) {
+      const pos = JSON.parse(savedPos);
+      btn.style.left = pos.left;
+      btn.style.top = pos.top;
+      btn.style.right = 'auto';
+      btn.style.bottom = 'auto';
+    } else {
+      btn.style.left = '20px';
+      btn.style.top = '20px';
+    }
+
+    const isHidden = localStorage.getItem('btnHidden');
+    if (isHidden === 'true') {
+      btn.style.display = 'none';
+    }
+
+    document.body.appendChild(btn);
+  </script>
+
 </body>
 </html>
