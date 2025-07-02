@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+  <meta charset="UTF-8" />
+  <title>כפתור החלפת כיוון - גרור לסימניות</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 2rem;
+      direction: rtl;
+      background: #f9f9f9;
+      color: #333;
+    }
+    h1 {
+      margin-bottom: 1rem;
+    }
+    #bookmarklet {
+      display: inline-block;
+      background-color: #007bff;
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 1.2rem;
+      cursor: grab;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      user-select: none;
+      transition: background-color 0.3s ease;
+    }
+    #bookmarklet:hover {
+      background-color: #0056b3;
+    }
+    p {
+      max-width: 400px;
+      margin: 1rem auto 0;
+      font-size: 1rem;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <h1>כפתור החלפת כיוון כתיבה</h1>
+  <a href="javascript:(()=>{const e=localStorage.getItem('direction');e&&(document.documentElement.style.transition='all 0.3s ease',document.documentElement.dir=e);const t=window.matchMedia('(prefers-color-scheme: dark)').matches,o=t?'#0a84ff':'#007bff',r=t?'#0060df':'#0056b3',n='white',d=document.createElement('button');d.id='dir-toggle-btn',d.textContent='rtl'===document.documentElement.dir?'החלף ל-LTR':'החלף ל-RTL',Object.assign(d.style,{position:'fixed',top:'20px',left:'20px',padding:'12px 20px',backgroundColor:o,color:n,border:'none',borderRadius:'8px',fontSize:'16px',fontFamily:'Arial, sans-serif',cursor:'grab',boxShadow:'0 4px 8px rgba(0,0,0,0.2)',transition:'background-color 0.2s ease, transform 0.05s linear',zIndex:9999,userSelect:'none',transform:'translate(0px, 0px)'}),d.onmouseenter=()=>d.style.backgroundColor=r,d.onmouseleave=()=>d.style.backgroundColor=o;let l=!1,c=!1,a=0,s=0,i=0,m=0;d.addEventListener('click',()=>{if(c)return;const e=document.documentElement,t='rtl'===e.dir?'ltr':'rtl';e.style.transition='all 0.3s ease',e.dir=t,d.textContent='rtl'===t?'החלף ל-LTR':'החלף ל-RTL',localStorage.setItem('direction',t)}),d.onmousedown=function(t){t.preventDefault(),l=!0,c=!1,d.style.cursor='grabbing';const o=d.getBoundingClientRect();a=t.clientX-o.left,s=t.clientY-o.top;function r(t){c=!0,i=t.clientX-a,m=t.clientY-s;const e=window.innerWidth-d.offsetWidth,r=window.innerHeight-d.offsetHeight;i=Math.min(Math.max(0,i),e),m=Math.min(Math.max(0,m),r),d.style.transform=`translate(${i}px, ${m}px)`}document.addEventListener('mousemove',r),document.onmouseup=function(){document.removeEventListener('mousemove',r),document.onmouseup=null,d.style.cursor='grab',c&&localStorage.setItem('btnPosTransform',JSON.stringify({x:i,y:m})),setTimeout(()=>{c=!1},0)}},d.ondragstart=()=>!1;const u=localStorage.getItem('btnPosTransform');if(u){const e=JSON.parse(u);i=e.x,m=e.y,d.style.transform=`translate(${i}px, ${m}px)`}document.body.appendChild(d),window.addEventListener('resize',()=>{const e=window.innerWidth-d.offsetWidth,t=window.innerHeight-d.offsetHeight;i=Math.min(i,e),m=Math.min(m,t),d.style.transform=`translate(${i}px, ${m}px)`})})();" id="bookmarklet" draggable="true">גרור את כפתור החלפת הכיוון לסרגל הסימניות</a>
+  <p>כשתגרור אותו לסרגל הסימניות שלך, תוכל ללחוץ עליו בכל דף אינטרנט כדי להפעיל את הכפתור.</p>
+</body>
+</html>
