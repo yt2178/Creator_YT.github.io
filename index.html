@@ -3,251 +3,110 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>כפתור החלפת כיוון כתיבה - גרור וסמן</title>
+  <title>כלים לשיפור חווית הגלישה</title>
   <style>
     body {
       font-family: 'Heebo', Arial, sans-serif;
-      background: linear-gradient(135deg, #74ebd5, #ACB6E5);
-      color: #333;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #fff;
       padding: 2rem;
       margin: 0;
       direction: rtl;
-      transition: background 0.5s, color 0.5s;
       min-height: 100vh;
       box-sizing: border-box;
     }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    }
     h1 {
-      margin-bottom: 1rem;
+      margin-bottom: 2rem;
       text-align: center;
+      border-bottom: 2px solid rgba(255,255,255,0.3);
+      padding-bottom: 1rem;
+    }
+    .tool-section {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+    }
+    h2 {
+      margin-top: 0;
+      margin-bottom: 1rem;
     }
     p {
-      max-width: 450px;
-      margin: 1rem auto 0;
-      font-size: 1rem;
-      color: inherit;
-      text-align: center;
-      line-height: 1.6;
+      line-height: 1.7;
+      margin-top: 0;
     }
-    a#bookmarklet {
+    a.bookmarklet {
       display: inline-block;
       background-color: #007bff;
       color: white;
-      padding: 1rem 2rem;
+      padding: 1rem 1.5rem;
       border-radius: 8px;
       text-decoration: none;
       font-size: 1.2rem;
       cursor: grab;
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
       user-select: none;
-      transition: background-color 0.3s ease;
-      margin: 2rem auto 0;
-      display: block;
-      width: fit-content;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      margin-top: 1rem;
     }
-    a#bookmarklet:hover {
+    a.bookmarklet:hover {
       background-color: #0056b3;
+      transform: translateY(-2px);
     }
-
-    /* סגנונות לכפתור שנוצר דינמית (משותף לדף ולבוקמרקלט) */
-    #dir-toggle-btn {
-      position: fixed;
-      padding: 8px 12px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      font-family: Arial, sans-serif;
-      cursor: grab;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      transition: background-color 0.3s ease;
-      z-index: 99999;
-      user-select: none;
-      touch-action: none;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+    a.bookmarklet.secondary {
+        background-color: #28a745;
     }
-    #dir-toggle-btn:hover {
-      background-color: #0056b3;
-    }
-    
-    #close-btn {
-      background: rgba(255, 255, 255, 0.2);
-      border: none;
-      color: white;
-      font-weight: bold;
-      font-size: 16px;
-      cursor: pointer;
-      padding: 0;
-      margin: 0;
-      line-height: 1;
-      width: 18px;
-      height: 18px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 50%;
-      transition: background-color 0.3s ease;
-    }
-    #close-btn:hover {
-      background-color: rgba(255, 255, 255, 0.5);
+    a.bookmarklet.secondary:hover {
+        background-color: #218838;
     }
   </style>
 </head>
 <body>
 
-  <h1>כלי להחלפת כיוון כתיבה</h1>
-  <p>
-    גררו את הכפתור הכחול שלמטה אל סרגל הסימניות בדפדפן שלכם.
-    <br>
-    בכל אתר שבו תרצו להחליף בין כיוון ימין-לשמאל (RTL) לשמאל-לימין (LTR), פשוט לחצו על הסימנייה שיצרתם.
-  </p>
+  <div class="container">
+    <h1>סרגל הכלים שלי</h1>
 
-  <!-- הקישור (בוקמרקלט) עם הקוד המתוקן והמשופר -->
-  <a href="javascript:(()=>{const t=document.getElementById('dir-toggle-btn');if(t)return t.style.display='flex',void localStorage.removeItem('btnHidden');const e=document.createElement('button');e.id='dir-toggle-btn';const o=document.createElement('button');o.id='close-btn',o.textContent='×',o.title='הסתר כפתור',o.type='button';const n=document.createElement('span');n.id='btn-text',e.appendChild(o),e.appendChild(n),Object.assign(e.style,{position:'fixed',padding:'8px 12px',border:'none',borderRadius:'8px',fontSize:'16px',fontFamily:'Arial, sans-serif',cursor:'grab',boxShadow:'0 4px 8px rgba(0,0,0,0.2)',transition:'background-color .3s ease',zIndex:'99999',userSelect:'none',touchAction:'none',display:'flex',alignItems:'center',gap:'8px'}),Object.assign(o.style,{background:'rgba(255,255,255,.2)',border:'none',color:'#fff',fontWeight:'bold',fontSize:'16px',cursor:'pointer',padding:'0',margin:'0',lineHeight:'1',width:'18px',height:'18px',display:'flex',justifyContent:'center',alignItems:'center',borderRadius:'50%',transition:'background-color .3s ease'});const i=()=>{const t=window.matchMedia('(prefers-color-scheme: dark)').matches;e.style.backgroundColor=t?'#0a84ff':'#007bff',e.style.color='#fff'};const l=localStorage.getItem('direction');l&&(document.documentElement.dir=l),n.textContent='rtl'===document.documentElement.dir?'החלף ל-LTR':'החלף ל-RTL',i(),e.onmouseenter=()=>{const t=window.matchMedia('(prefers-color-scheme: dark)').matches;e.style.backgroundColor=t?'#0060df':'#0056b3'},e.onmouseleave=i,o.onmouseenter=()=>o.style.backgroundColor='rgba(255,255,255,.5)',o.onmouseleave=()=>o.style.backgroundColor='rgba(255,255,255,.2)';let s=!1;e.addEventListener('click',t=>{if(s||t.target===o)return;const i=document.documentElement,l='rtl'===i.dir?'ltr':'rtl';i.dir=l,n.textContent='rtl'===l?'החלף ל-LTR':'החלף ל-RTL',localStorage.setItem('direction',l)}),e.onmousedown=t=>{if(0!==t.button)return;s=!1;let o=t.clientX,n=t.clientY;e.style.cursor='grabbing';const i=e.getBoundingClientRect(),l=t.clientX-i.left,c=t.clientY-i.top;const a=d=>{const i=d.clientX-o,r=d.clientY-n;if(!s&&(Math.abs(i)>5||Math.abs(r)>5))s=!0;if(!s)return;let t=d.clientX-l,a=d.clientY-c;const u=window.innerWidth-e.offsetWidth,g=window.innerHeight-e.offsetHeight;t=Math.min(Math.max(0,t),u),a=Math.min(Math.max(0,a),g),e.style.left=t+'px',e.style.top=a+'px',e.style.right='auto',e.style.bottom='auto'},r=()=>{document.removeEventListener('mousemove',a),document.removeEventListener('mouseup',r),e.style.cursor='grab',s&&localStorage.setItem('btnPos',JSON.stringify({left:e.style.left,top:e.style.top})),setTimeout(()=>s=!1,0)};document.addEventListener('mousemove',a),document.addEventListener('mouseup',r)},e.ondragstart=()=>!1,o.onclick=t=>{t.stopPropagation(),e.style.display='none',localStorage.setItem('btnHidden','true')};const c=localStorage.getItem('btnPos');c?(Object.assign(e.style,JSON.parse(c)),e.style.right='auto',e.style.bottom='auto'):(e.style.left='20px',e.style.top='20px');'true'===localStorage.getItem('btnHidden')&&(e.style.display='none'),document.body.appendChild(e)})();" id="bookmarklet" draggable="true">
-    כפתור צף ←
-  </a>
+    <!-- ====================================================== -->
+    <!--                  כלי מס' 1: הכלי הכללי                  -->
+    <!-- ====================================================== -->
+    <div class="tool-section">
+      <h2>כלי כללי להחלפת כיווניות (RTL/LTR)</h2>
+      <p>
+        זהו כלי אוניברסלי שנועד לעבוד על <strong>כל אתר אינטרנט</strong>.
+        גררו את הכפתור לסרגל הסימניות. בלחיצה עליו, יתווסף לדף כפתור צף שיאפשר לכם להחליף את כיוון הכתיבה של הדף כולו בין ימין-לשמאל (RTL) לשמאל-לימין (LTR).
+      </p>
+      <a href="javascript:(()=>{const t=document.getElementById('dir-toggle-btn');if(t)return t.style.display='flex',void localStorage.removeItem('btnHidden');const e=document.createElement('button');e.id='dir-toggle-btn';const o=document.createElement('button');o.id='close-btn',o.textContent='×',o.title='הסתר כפתור',o.type='button';const n=document.createElement('span');n.id='btn-text',e.appendChild(o),e.appendChild(n),Object.assign(e.style,{position:'fixed',padding:'8px 12px',backgroundColor:'#007bff',color:'white',border:'none',borderRadius:'8px',fontSize:'16px',fontFamily:'Arial, sans-serif',cursor:'grab',boxShadow:'0 4px 8px rgba(0,0,0,0.2)',zIndex:'99999',userSelect:'none',touchAction:'none',display:'flex',alignItems:'center',gap:'8px'}),Object.assign(o.style,{background:'rgba(255,255,255,.2)',border:'none',color:'#fff',fontWeight:'bold',fontSize:'16px',cursor:'pointer',padding:'0',margin:'0',lineHeight:'1',width:'18px',height:'18px',display:'flex',justifyContent:'center',alignItems:'center',borderRadius:'50%',transition:'background-color .3s ease'});const i=localStorage.getItem('direction');i&&(document.documentElement.dir=i),n.textContent='rtl'===document.documentElement.dir?'החלף ל-LTR':'החלף ל-RTL';let s=!1;e.addEventListener('click',t=>{if(s||t.target===o)return;const i=document.documentElement,l='rtl'===i.dir?'ltr':'rtl';i.dir=l,n.textContent='rtl'===l?'החלף ל-LTR':'החלף ל-RTL',localStorage.setItem('direction',l)}),e.onmousedown=t=>{if(0!==t.button)return;s=!1;let o=t.clientX,n=t.clientY;e.style.cursor='grabbing';const i=e.getBoundingClientRect(),l=t.clientX-i.left,c=t.clientY-i.top;const a=d=>{const i=d.clientX-o,r=d.clientY-n;if(!s&&(Math.abs(i)>5||Math.abs(r)>5))s=!0;if(!s)return;let t=d.clientX-l,a=d.clientY-c;const u=window.innerWidth-e.offsetWidth,g=window.innerHeight-e.offsetHeight;t=Math.min(Math.max(0,t),u),a=Math.min(Math.max(0,a),g),e.style.left=t+'px',e.style.top=a+'px',e.style.right='auto',e.style.bottom='auto'},r=()=>{document.removeEventListener('mousemove',a),document.removeEventListener('mouseup',r),e.style.cursor='grab',s&&localStorage.setItem('btnPos',JSON.stringify({left:e.style.left,top:e.style.top})),setTimeout(()=>s=!1,0)};document.addEventListener('mousemove',a),document.addEventListener('mouseup',r)},e.ondragstart=()=>!1,o.onclick=t=>{t.stopPropagation(),e.style.display='none',localStorage.setItem('btnHidden','true')};const l=localStorage.getItem('btnPos');l?(Object.assign(e.style,JSON.parse(l)),e.style.right='auto',e.style.bottom='auto'):(e.style.left='20px',e.style.top='20px');'true'===localStorage.getItem('btnHidden')&&(e.style.display='none'),document.body.appendChild(e)})();" class="bookmarklet" draggable="true">
+        גרור אותי (כללי) ←
+      </a>
+    </div>
 
-  <!-- סקריפט ההדגמה, זהה לבוקמרקלט רק לא דחוס -->
-  <script>
-    (() => {
-        // --- 1. בדיקה אם הכפתור כבר קיים ---
-        const existingBtn = document.getElementById('dir-toggle-btn');
-        if (existingBtn) {
-            existingBtn.style.display = 'flex'; // הצג אותו אם היה מוסתר
-            localStorage.removeItem('btnHidden');
-            return; // עצור כאן כדי לא ליצור כפתור חדש
-        }
+    <!-- ====================================================== -->
+    <!--                כלי מס' 2: הכלי הייעודי                 -->
+    <!-- ====================================================== -->
+    <div class="tool-section">
+      <h2>כלי ייעודי לתיקון עיצוב בממשקי צ'אט</h2>
+      <p>
+        כלי זה מיועד ספציפית לממשקי צ'אט (כמו Gemini) שבהם יש בעיות תצוגה בעברית.
+        הוא <strong>לא משנה את כיוון הדף כולו</strong>, אלא מוסיף כפתור צף שמתפקד כ"מתג":
+        <br>
+        <strong>לחיצה ראשונה:</strong> מתקן אוטומטית בעיות עיצוב נפוצות (יישור קלט, תשובות, רשימות ובלוקי קוד).
+        <br>
+        <strong>לחיצה שנייה:</strong> מסיר את התיקונים ומחזיר את העיצוב למצבו המקורי.
+      </p>
+      <a href="javascript:(()=>{const t='css-toggle-btn',e='custom-rtl-styles-injector',o='conditional-rtl-style-injector',i='cssBtnPos',s='cssBtnHidden',n='stylesApplied';if(document.getElementById(t))return document.getElementById(t).style.display='flex',void localStorage.removeItem(s);const l=document.createElement('button');l.id=t;const d=document.createElement('button');d.textContent='×',d.title='הסתר כפתור',d.type='button';const c=document.createElement('span');l.appendChild(d),l.appendChild(c),Object.assign(l.style,{position:'fixed',padding:'8px 12px',backgroundColor:'#28a745',color:'white',border:'none',borderRadius:'8px',fontSize:'16px',fontFamily:'Arial, sans-serif',cursor:'grab',boxShadow:'0 4px 8px rgba(0,0,0,0.2)',zIndex:'99998',userSelect:'none',touchAction:'none',display:'flex',alignItems:'center',gap:'8px'}),Object.assign(d.style,{background:'rgba(255,255,255,.2)',border:'none',color:'#fff',fontWeight:'bold',fontSize:'16px',cursor:'pointer',padding:'0',margin:'0',lineHeight:'1',width:'18px',height:'18px',display:'flex',justifyContent:'center',alignItems:'center',borderRadius:'50%',transition:'background-color .3s ease'});let a=!1;const r=()=>{const t=document.getElementById(e),i=document.getElementById(o);t&&t.remove(),i&&i.remove()},u=()=>{r();const t=document.createElement('style');t.id=e,t.innerHTML=`\n      ms-chat-turn:not(:has(ms-thought-chunk)) .chat-turn-container,\n      div.user-prompt-container,\n      div.text-wrapper {\n        direction: rtl !important;\n        text-align: right !important;\n      }\n      ms-code-block, ms-code-block pre, ms-code-block code {\n        direction: ltr !important;\n        text-align: left !important;\n      }\n      ms-cmark-node ol, ms-cmark-node ul {\n        padding-right: 20px !important;\n        padding-left: 0 !important;\n      }\n    `,document.head.appendChild(t);if(document.documentElement.classList.contains('translated-rtl')){const e=document.createElement('style');e.id=o,e.innerHTML=`\n        ms-chat-turn:has(ms-thought-chunk) .chat-turn-container {\n          direction: rtl !important;\n          text-align: right !important;\n        }\n      `,document.head.appendChild(e)}},m=()=>{const t='true'===localStorage.getItem(n);l.style.backgroundColor=t?'#c82333':'#28a745',c.textContent=t?'הסר תיקונים':'החל תיקונים'};l.addEventListener('click',t=>{if(a||t.target===d)return;const e='true'!==localStorage.getItem(n);localStorage.setItem(n,e),e?u():r(),m()}),d.onclick=t=>{t.stopPropagation(),l.style.display='none',localStorage.setItem(s,'true')},l.onmousedown=t=>{if(0!==t.button)return;a=!1;let e=t.clientX,o=t.clientY;l.style.cursor='grabbing';const s=l.getBoundingClientRect(),n=t.clientX-s.left,d=t.clientY-s.top,c=r=>{const s=r.clientX-e,u=r.clientY-o;if(!a&&(Math.abs(s)>5||Math.abs(u)>5))a=!0;if(!a)return;let t=r.clientX-n,m=r.clientY-d;const p=window.innerWidth-l.offsetWidth,g=window.innerHeight-l.offsetHeight;t=Math.min(Math.max(0,t),p),m=Math.min(Math.max(0,m),g),l.style.left=t+'px',l.style.top=m+'px',l.style.right='auto',l.style.bottom='auto'},p=()=>{document.removeEventListener('mousemove',c),document.removeEventListener('mouseup',p),l.style.cursor='grab',a&&localStorage.setItem(i,JSON.stringify({left:l.style.left,top:l.style.top})),setTimeout(()=>a=!1,0)};document.addEventListener('mousemove',c),document.addEventListener('mouseup',p)},l.ondragstart=()=>!1;const p=localStorage.getItem(i);p?(Object.assign(l.style,JSON.parse(p)),l.style.right='auto',l.style.bottom='auto'):(l.style.left='20px',l.style.top='80px');'true'===localStorage.getItem(s)&&(l.style.display='none'),'true'===localStorage.getItem(n)&&u(),m(),document.body.appendChild(l)})();" class="bookmarklet secondary" draggable="true">
+        גרור אותי (לצ'אט) ←
+      </a>
+    </div>
 
-        // --- 2. יצירת האלמנטים ---
-        const btn = document.createElement('button');
-        btn.id = 'dir-toggle-btn';
-
-        const closeBtn = document.createElement('button');
-        closeBtn.id = 'close-btn';
-        closeBtn.textContent = '×';
-        closeBtn.title = 'הסתר כפתור';
-        closeBtn.type = 'button';
-
-        const btnText = document.createElement('span');
-        btnText.id = 'btn-text';
-
-        // הרכבת הכפתור: הוספת כפתור הסגירה והטקסט לתוכו
-        btn.appendChild(closeBtn);
-        btn.appendChild(btnText);
-
-        // --- 3. טעינת הגדרות שמורות ---
-        // טעינת כיוון שמור
-        const savedDir = localStorage.getItem('direction');
-        if (savedDir) {
-            document.documentElement.dir = savedDir;
-        }
-        btnText.textContent = document.documentElement.dir === 'rtl' ? 'החלף ל-LTR' : 'החלף ל-RTL';
-
-        // --- 4. הגדרת פונקציונליות ---
-        let isDragging = false; // משתנה למניעת קליק בזמן גרירה
-
-        // החלפת כיוון בלחיצה
-        btn.addEventListener('click', (e) => {
-            if (isDragging || e.target === closeBtn) {
-                return; // אם גוררים או שלחצו על האיקס, אל תחליף כיוון
-            }
-            const html = document.documentElement;
-            const newDir = html.dir === 'rtl' ? 'ltr' : 'rtl';
-            html.dir = newDir;
-            btnText.textContent = newDir === 'rtl' ? 'החלף ל-LTR' : 'החלף ל-RTL';
-            localStorage.setItem('direction', newDir);
-        });
-
-        // הסתרת הכפתור בלחיצה על האיקס
-        closeBtn.onclick = (e) => {
-            e.stopPropagation(); // מונע מהקליק להגיע לכפתור האב
-            btn.style.display = 'none';
-            localStorage.setItem('btnHidden', 'true');
-        };
-
-        // גרירת הכפתור
-        btn.onmousedown = function(event) {
-            if (event.button !== 0) return; // התעלם מלחיצות ימניות/אמצעיות
-            
-            let dragStartX = event.clientX;
-            let dragStartY = event.clientY;
-
-            btn.style.cursor = 'grabbing';
-            const rect = btn.getBoundingClientRect();
-            const shiftX = event.clientX - rect.left;
-            const shiftY = event.clientY - rect.top;
-
-            function onMouseMove(moveEvent) {
-                const moveX = moveEvent.clientX - dragStartX;
-                const moveY = moveEvent.clientY - dragStartY;
-
-                // רק אחרי תזוזה של 5 פיקסלים, נחשיב את הפעולה כ"גרירה"
-                if (!isDragging && (Math.abs(moveX) > 5 || Math.abs(moveY) > 5)) {
-                    isDragging = true;
-                }
-                if (!isDragging) return;
-
-                let newX = moveEvent.clientX - shiftX;
-                let newY = moveEvent.clientY - shiftY;
-
-                // הגבלת התזוזה לגבולות המסך
-                const maxX = window.innerWidth - btn.offsetWidth;
-                const maxY = window.innerHeight - btn.offsetHeight;
-                newX = Math.min(Math.max(0, newX), maxX);
-                newY = Math.min(Math.max(0, newY), maxY);
-
-                btn.style.left = newX + 'px';
-                btn.style.top = newY + 'px';
-                btn.style.right = 'auto'; // נטרול עיצוב קודם
-                btn.style.bottom = 'auto'; // נטרול עיצוב קודם
-            }
-
-            function onMouseUp() {
-                document.removeEventListener('mousemove', onMouseMove);
-                document.removeEventListener('mouseup', onMouseUp);
-                btn.style.cursor = 'grab';
-
-                if (isDragging) {
-                    localStorage.setItem('btnPos', JSON.stringify({
-                        left: btn.style.left,
-                        top: btn.style.top
-                    }));
-                }
-                // מאפסים את מצב הגרירה רגע אחרי שהקליק מסתיים
-                setTimeout(() => { isDragging = false; }, 0);
-            }
-
-            document.addEventListener('mousemove', onMouseMove);
-            document.addEventListener('mouseup', onMouseUp);
-        };
-
-        btn.ondragstart = () => false; // מניעת התנהגות גרירה דיפולטיבית של הדפדפן
-
-        // --- 5. שחזור מצב ומיקום ---
-        const savedPos = localStorage.getItem('btnPos');
-        if (savedPos) {
-            const pos = JSON.parse(savedPos);
-            btn.style.left = pos.left;
-            btn.style.top = pos.top;
-        } else {
-            // מיקום ברירת מחדל
-            btn.style.left = '20px';
-            btn.style.top = '20px';
-        }
-
-        // שחזור אם הכפתור היה מוסתר
-        const isHidden = localStorage.getItem('btnHidden');
-        if (isHidden === 'true') {
-            btn.style.display = 'none';
-        }
-
-        // --- 6. הוספת הכפתור לדף ---
-        document.body.appendChild(btn);
-
-    })();
-  </script>
+  </div>
 
 </body>
 </html>
