@@ -102,7 +102,7 @@
         זהו כלי אוניברסלי שנועד לעבוד על <strong>כל אתר אינטרנט</strong>. גררו את הכפתור לסרגל הסימניות. בלחיצה עליו, הוא יחליף את כיוון הכתיבה של הדף כולו בין ימין-לשמאל (RTL) לשמאל-לימין (LTR) באופן מיידי. לחיצה נוספת תחזיר את המצב לקדמותו.
       </p>
        <a href="javascript:(()=>{setTimeout(()=>{const t=document.documentElement,e=t.dir,o='rtl'===e?'ltr':'rtl';t.dir=o,localStorage.setItem('direction',o),alert(`כיוון הדף שונה ל-${o.toUpperCase()}`)},200)})();" class="bookmarklet v2" draggable="true">
-        גרור אותי (כללי مباشر) ←
+        גרור אותי (כללי) ←
       </a>
     </div>
 
@@ -128,7 +128,7 @@
         כלי זה מיועד ספציפית לממשקי צ'אט (של AI STUDIO) שבהם יש בעיות תצוגה בעברית. הסימנייה עצמה משמשת כ"מתג": לחיצה ראשונה מפעילה את תיקוני העיצוב, לחיצה שנייה מכבה אותם.
       </p>
       <a href="javascript:(()=>{setTimeout(()=>{const t='aiFixesApplied',e=[{selector:'ms-chat-turn:not(:has(ms-thought-chunk)) .chat-turn-container, div.user-prompt-container, div.text-wrapper',styles:{direction:'rtl',textAlign:'right'}},{selector:'ms-code-block, ms-code-block pre, ms-code-block code',styles:{direction:'ltr',textAlign:'left'}},{selector:'ms-cmark-node ol, ms-cmark-node ul',styles:{paddingRight:'20px',paddingLeft:'0'}},{selector:'ms-chat-turn:has(ms-thought-chunk) .chat-turn-container',styles:document.documentElement.classList.contains('translated-rtl')?{direction:'rtl',textAlign:'right'}:{}}];const o='true'===localStorage.getItem(t),s=!o;s?alert('תיקוני עיצוב ל-AI Studio הופעלו.'):alert('תיקוני עיצוב ל-AI Studio הוסרו.'),e.forEach(t=>{document.querySelectorAll(t.selector).forEach(e=>{for(const o in t.styles)e.style[o]=s?t.styles[o]:''})}),localStorage.setItem(t,s)},200)})();" class="bookmarklet v4" draggable="true">
-        גרור אותי (AI Studio مباشر) ←
+        גרור אותי (AI Studio) ←
       </a>
     </div>
 
