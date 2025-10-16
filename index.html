@@ -94,15 +94,15 @@
     </div>
     
     <!-- ====================================================== -->
-    <!--          כלי מס' 2: כללי ללא כפתור (מתג)               -->
+    <!--          כלי מס' 2: כללי ללא כפתור (מתג) - מתוקן        -->
     <!-- ====================================================== -->
     <div class="tool-section">
-      <h2>2. כלי כללי להחלפת כיווניות (ללא כפתור)</h2>
+      <h2>2. כלי כללי להחלפת כיווניות (פעולה ישירה)</h2>
       <p>
         זהו כלי אוניברסלי שנועד לעבוד על <strong>כל אתר אינטרנט</strong>. גררו את הכפתור לסרגל הסימניות. בלחיצה עליו, הוא יחליף את כיוון הכתיבה של הדף כולו בין ימין-לשמאל (RTL) לשמאל-לימין (LTR) באופן מיידי. לחיצה נוספת תחזיר את המצב לקדמותו.
       </p>
-       <a href="javascript:(()=>{setTimeout(()=>{const t=document.documentElement,e=t.dir,o='rtl'===e?'ltr':'rtl';t.dir=o,localStorage.setItem('direction',o),alert(`כיוון הדף שונה ל-${o.toUpperCase()}`)},200)})();" class="bookmarklet v2" draggable="true">
-        גרור אותי (כללי) ←
+       <a href="javascript:(()=>{setTimeout(()=>{const t=document.documentElement,e='true'===localStorage.getItem('directRtlToggle'),o=!e;t.dir=o?'rtl':'ltr',localStorage.setItem('directRtlToggle',o)},200)})();" class="bookmarklet v2" draggable="true">
+        גרור אותי (כללי ישיר) ←
       </a>
     </div>
 
@@ -120,20 +120,21 @@
     </div>
 
     <!-- ====================================================== -->
-    <!--      כלי מס' 4: מתקן עיצוב ללא כפתור (מתג)            -->
+    <!--      כלי מס' 4: מתקן עיצוב ללא כפתור (מתג) - מתוקן     -->
     <!-- ====================================================== -->
     <div class="tool-section">
-      <h2>4. כלי ייעודי לתיקון עיצוב ב-AI Studio (ללא כפתור)</h2>
+      <h2>4. כלי ייעודי לתיקון עיצוב ב-AI Studio (פעולה ישירה)</h2>
       <p>
         כלי זה מיועד ספציפית לממשקי צ'אט (של AI STUDIO) שבהם יש בעיות תצוגה בעברית. הסימנייה עצמה משמשת כ"מתג": לחיצה ראשונה מפעילה את תיקוני העיצוב, לחיצה שנייה מכבה אותם.
       </p>
-      <a href="javascript:(()=>{setTimeout(()=>{const t='aiFixesApplied',e=[{selector:'ms-chat-turn:not(:has(ms-thought-chunk)) .chat-turn-container, div.user-prompt-container, div.text-wrapper',styles:{direction:'rtl',textAlign:'right'}},{selector:'ms-code-block, ms-code-block pre, ms-code-block code',styles:{direction:'ltr',textAlign:'left'}},{selector:'ms-cmark-node ol, ms-cmark-node ul',styles:{paddingRight:'20px',paddingLeft:'0'}},{selector:'ms-chat-turn:has(ms-thought-chunk) .chat-turn-container',styles:document.documentElement.classList.contains('translated-rtl')?{direction:'rtl',textAlign:'right'}:{}}];const o='true'===localStorage.getItem(t),s=!o;s?alert('תיקוני עיצוב ל-AI Studio הופעלו.'):alert('תיקוני עיצוב ל-AI Studio הוסרו.'),e.forEach(t=>{document.querySelectorAll(t.selector).forEach(e=>{for(const o in t.styles)e.style[o]=s?t.styles[o]:''})}),localStorage.setItem(t,s)},200)})();" class="bookmarklet v4" draggable="true">
-        גרור אותי (AI Studio) ←
+      <a href="javascript:(()=>{setTimeout(()=>{const t='aiFixesApplied',e=[{selector:'ms-chat-turn:not(:has(ms-thought-chunk)) .chat-turn-container, div.user-prompt-container, div.text-wrapper',styles:{direction:'rtl',textAlign:'right'}},{selector:'ms-code-block, ms-code-block pre, ms-code-block code',styles:{direction:'ltr',textAlign:'left'}},{selector:'ms-cmark-node ol, ms-cmark-node ul',styles:{paddingRight:'20px',paddingLeft:'0'}},{selector:'ms-chat-turn:has(ms-thought-chunk) .chat-turn-container',styles:document.documentElement.classList.contains('translated-rtl')?{direction:'rtl',textAlign:'right'}:{}}];const o='true'===localStorage.getItem(t),s=!o;e.forEach(t=>{document.querySelectorAll(t.selector).forEach(e=>{for(const o in t.styles)e.style[o]=s?t.styles[o]:''})}),localStorage.setItem(t,s)},200)})();" class="bookmarklet v4" draggable="true">
+        גרור אותי (AI Studio ישיר) ←
       </a>
     </div>
 
     <h3>היסטוריית גרסאות</h3>
     <p style="text-align: center; font-size: 0.9rem; opacity: 0.8;">
+      גירסה 3.1.0: שיפור חווית משתמש - הסרת התראות וטקסט מיותר.<br>
       גירסה 3.0.0: פיצול לארבעה כלים נפרדים לבחירת המשתמש.<br>
       גירסה 2.0.0: שני לחצנים יציבים, כולל תיקון תאימות לאתרים מאובטחים (CSP).<br>
       גירסה 1.0.0: גרסת בטא ראשונית.
